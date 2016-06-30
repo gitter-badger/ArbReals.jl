@@ -3,7 +3,7 @@ ArbReals
 
 real intervals with floating point bounds (uses the Arb library)
 
-**under construction**
+**under construction -- better now, needs easy conversions (pending)**
 
 ### ToDo
 
