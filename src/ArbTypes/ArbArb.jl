@@ -70,7 +70,7 @@ end
 
 
 function upperbound{P}(x::ArbArb{P})
-    a = init(ArbArf{P}(0,0,0,0)
+    a = ArbArf{P}(0,0,0,0)
     ccall(@libarb(arf_init), Void, (Ptr{ArbArf{P}},), &a)
     z = init(ArbArb{P})
     ccall(@libarb(arb_get_ubound_arf), Void, (Ptr{ArbArf}, Ptr{ArbArb}, Int), &a, &x, P)
