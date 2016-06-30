@@ -116,6 +116,13 @@ function midpoint_radius{P}(midpoint::ArbArf{P}, radius::ArbMag)
     return z
 end
 
+function midpoint_radius(midpoint::Float64, radius::Float64)
+    p = precision(ArbArb)
+    m = convert(ArbArf{p}, midpoint)
+    r = convert(ArbMag, radius)
+    return midpoint_radius(m,r)
+end
+
 
 # conversions
 
@@ -136,6 +143,8 @@ function convert{P}(::Type{ArbArb{P}}, x::ArbArf{P})
     z.mantissa2 = x.mantissa2
     return z
 end
+
+# string conversions
 
 function convert{P}(::Type{ArbArb{P}}, x::String)
     z = init(ArbArb{P})
@@ -190,25 +199,6 @@ function stringall_midpoint{P}(x::ArbArb{P})
    return s
 end
 
-#=
-function string_midpoint{P}(x::ArbArb{P})
-   n = floor(Int, 0.125+P*0.3010299956639811952137)
-   flags = UInt(2) # suppress radius
-   cstr = ccall(@libarb(arb_get_str), Ptr{UInt8}, (Ptr{ArbArb{P}}, Int, UInt), &x, n, flags)
-   s = unsafe_string(cstr)
-   ccall(@libflint(flint_free), Void, (Ptr{UInt8},), cstr)
-   return s
-end
-
-function string{P}(x::ArbArb{P})
-   n = floor(Int, 0.125+P*0.3010299956639811952137)
-   flags = UInt(4) # nearest?
-   cstr = ccall(@libarb(arb_get_str), Ptr{UInt8}, (Ptr{ArbArb{P}}, Int, UInt), &x, n, flags)
-   s = unsafe_string(cstr)
-   ccall(@libflint(flint_free), Void, (Ptr{UInt8},), cstr)
-   return s
-end
-=#
 
 function show{P}(io::IO, x::ArbArb{P})
     s = string(x)
