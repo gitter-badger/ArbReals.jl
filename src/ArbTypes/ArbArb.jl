@@ -143,7 +143,7 @@ function convert{P}(::Type{ArbArb{P}}, x::String)
     return z
 end
 
-function convert{P}(::Type(String), x::ArbArb{P})
+function string{P}(x::ArbArb{P})
    n = floor(Int, 0.5+P*0.3010299956639811952137)
    cstr = ccall(@libarb(arb_get_str), Ptr{UInt8}, (Ptr{ArbArb{P}}, Int, UInt), &x, n, UInt(2))
    s = unsafe_string(cstr)
