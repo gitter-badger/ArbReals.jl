@@ -208,12 +208,14 @@ end
 
 
 function string{P}(x::ArbArb{P}, ndigits::Int)
-   s = String(x, ndigits, UInt(1)) # RoundNearest
+   flags = isexact(x) ? UInt(3) : UInt(1) # RoundNearest, many digits
+   s = String(x, ndigits, flags)
    return s
 end
 
 function string{P}(x::ArbArb{P})
-   s = String(x,UInt(4)) # RoundNearest
+   flags = isexact(x) ? UInt(3) : UInt(1) # RoundNearest, many digits
+   s = String(x,flags) # RoundNearest,
    return s
 end
 
@@ -221,20 +223,37 @@ function stringall{P}(x::ArbArb{P})
    s = String(x,UInt(1)) # RoundNearest
    return s
 end
-
-function string_midpoint{P}(x::ArbArb{P})
-   s = String(x,UInt(2)) # midpoint only (within 1ulp), RoundNearest
+function stringcompact{P}(x::ArbArb{P})
+   flags = isexact(x) ? UInt(2) : UInt(0) # RoundNearest, few digits
+   s = String(x, flags)
    return s
 end
-function string_midpoint{P}(x::ArbArb{P}, ndigits::Int)
-   s = String(x, ndigits, UInt(3)) # midpoint only (within 1ulp), RoundNearest
+
+function string_midpoint{P}(x::ArbArb{P})
+   s = string(midpoint(x))
+   return s
+end
+function stringcompact_midpoint{P}(x::ArbArb{P})
+   s = stringcompact(midpoint(x))
    return s
 end
 function stringall_midpoint{P}(x::ArbArb{P})
-   s = String(x,UInt(3)) # midpoint only (within 1ulp), RoundNearest
+   s = stringall(midpoint(x))
    return s
 end
 
+function string_radius{P}(x::ArbArb{P})
+   s = string(radius(x))
+   return s
+end
+function stringcompact_radius{P}(x::ArbArb{P})
+   s = stringcompact(radius(x))
+   return s
+end
+function stringall_radius{P}(x::ArbArb{P})
+   s = stringall(radius(x))
+   return s
+end
 
 function show{P}(io::IO, x::ArbArb{P})
     s = string(x)
@@ -242,7 +261,7 @@ function show{P}(io::IO, x::ArbArb{P})
 end
 
 function showcompact{P}(io::IO, x::ArbArb{P})
-    s = string_midpoint(x)
+    s = stringcompact(x)
     print(io, s)
 end
 
