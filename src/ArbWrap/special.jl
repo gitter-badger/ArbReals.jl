@@ -50,7 +50,7 @@ end
 for (op,cfunc) in ((:agm, :arb_agm), (:polylog, :arb_polylog))
   @eval begin
     function ($op){P}(x::ArbArb{P}, y::ArbArb{P}, prec::Int=P)
-      z = initializer(ArbArb{P})
+      z = init(ArbArb{P})
       ccall(@libarb($cfunc), Void, (Ptr{ArbArb}, Ptr{ArbArb}, Ptr{ArbArb}, Int), &z, &x, &y, P)
       return z
     end
