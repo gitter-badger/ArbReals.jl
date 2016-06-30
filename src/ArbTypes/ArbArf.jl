@@ -85,9 +85,26 @@ for T in (:Float64, :Float32, :BigFloat, :BigInt, :(Rational{BigInt}))
     @eval convert(::Type{ArbArf}, x::($T)) = convert(ArbArf{precision(ArbArf)}, x)
 end
 
+# string, show
+#
 function frexp{P}(x::ArbArf{P})
    mantissa = init(ArbArf{P})
    exponent = zero(Int64)
-   ccall(@libarb(arf_frexp), Void, (Ptr{ArfFloat{P}}, Int64, Ptr{ArfFloat{P}}), &mantissa, exponent, &x)
-   mantissa, exponent
+   ccall(@libarb(arf_frexp), Void, (Ptr{ArfFloat{P}}, Int64, Ptr{ArbArf{P}}), &mantissa, exponent, &x)
+   return (mantissa, exponent)
+end
+
+function string{P}(x::ArbArf{P})
+    bfprec = precision(BigFloat)
+    setprecision(BigFloat, P)
+    bf = convert(BigFloat, x)
+    s = string(bf)
+    setprecision(BigFloat, bfprec)
+    return s
+end
+
+function show{P}(io::IO, x::ArbArf{P})
+    s = string(x)
+    print(io, s)
+    return nothing
 end
