@@ -226,7 +226,7 @@ function stringall{P}(x::ArbArb{P})
 end
 function stringcompact{P}(x::ArbArb{P})
    flags = isexact(x) ? UInt(2) : UInt(0) # RoundNearest, few digits
-   s = String(x, flags)
+   s = String(x, 8, flags)
    return s
 end
 
