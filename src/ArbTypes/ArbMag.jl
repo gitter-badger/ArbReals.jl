@@ -55,6 +55,6 @@ function convert{T<:ArbMag}(::Type{T}, x::Int)
 end
 
 for T in (:UInt, :Int, :Float32, :Float64)
-    promote_rule(::Type{ArbMag}, ::Type{$T}) = ArbMag
+    @eval promote_rule(::Type{ArbMag}, ::Type{$T}) = ArbMag
 end
 
