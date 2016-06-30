@@ -172,12 +172,21 @@ function string{P}(x::ArbArb{P})
    return s
 end
 
+function stringall{P}(x::ArbArb{P})
+   s = String(x,UInt(1)) # RoundNearest
+   return s
+end
+
 function string_midpoint{P}(x::ArbArb{P})
    s = String(x,UInt(2)) # midpoint only (within 1ulp), RoundNearest
    return s
 end
 function string_midpoint{P}(x::ArbArb{P}, ndigits::Int)
    s = String(x, ndigits, UInt(3)) # midpoint only (within 1ulp), RoundNearest
+   return s
+end
+function stringall_midpoint{P}(x::ArbArb{P})
+   s = String(x,UInt(3)) # midpoint only (within 1ulp), RoundNearest
    return s
 end
 
@@ -206,3 +215,12 @@ function show{P}(io::IO, x::ArbArb{P})
     print(io, s)
 end
 
+function showcompact{P}(io::IO, x::ArbArb{P})
+    s = string_midpoint(x)
+    print(io, s)
+end
+
+function showall{P}(io::IO, x::ArbArb{P})
+    s = stringall(x)
+    print(io, s)
+end

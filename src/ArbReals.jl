@@ -1,7 +1,7 @@
 module ArbReals
 
 import Base: hash, convert, promote_rule,
-    String, string, show, showcompact,
+    String, string, show, showcompact, showall,
     precision, setprecision,
     isnan, isinf, isfinite, zero, one,
     isequal, isless, (==), (!=), (<), (<=), (>=), (>),
@@ -11,7 +11,7 @@ import Base: hash, convert, promote_rule,
 
 export stringcompact,
     bounds, midpoint, radius, midpoint_radius,
-    string_midpoint
+    string_midpoint, stringall
 
 include("NemoLibs.jl")  # ensure needed C libraries
 
