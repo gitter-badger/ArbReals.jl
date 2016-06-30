@@ -6,7 +6,7 @@
 for (op, i) in ((:zero,:0), (:one,:1), (:two,:2), (:three,:3), (:four, :4))
   @eval begin
     function ($op){P}(::Type{ArbArb{P}})
-        z = initializer(ArbArb{P})
+        z = init(ArbArb{P})
         ccall(@libarb(arb_set_si), Void, (Ptr{ArbArb}, Int), &z, $i)
         z
     end
@@ -33,7 +33,7 @@ end
 function round{P}(x::ArbArb{P}, sig::Int=P, base::Int=10)
     sig=abs(sig); base=abs(base)
     sigbits = min(P, ceil(Int, (sig * log(base)/log(2.0))))
-    z = initializer(ArbArb{P})
+    z = init(ArbArb{P})
     ccall(@libarb(arb_set_round), Void,  (Ptr{ArbArb}, Ptr{ArbArb}, Int), &z, &x, sigbits)
     return z
 end
@@ -41,7 +41,7 @@ end
 function ceil{P}(x::ArbArb{P}, sig::Int=P, base::Int=10)
     sig=abs(sig); base=abs(base)
     sigbits = min(P, ceil(Int, (sig * log(base)/log(2.0))))
-    z = initializer(ArbArb{P})
+    z = init(ArbArb{P})
     ccall(@libarb(arb_ceil), Void,  (Ptr{ArbArb}, Ptr{ArbArb}, Int), &z, &x, sigbits)
     return z
 end
@@ -49,7 +49,7 @@ end
 function floor{P}(x::ArbArb{P}, sig::Int=P, base::Int=10)
     sig=abs(sig); base=abs(base)
     sigbits = min(P, ceil(Int, (sig * log(base)/log(2.0))))
-    z = initializer(ArbArb{P})
+    z = init(ArbArb{P})
     ccall(@libarb(arb_floor), Void,  (Ptr{ArbArb}, Ptr{ArbArb}, Int), &z, &x, sigbits)
     return z
 end
@@ -58,7 +58,7 @@ end
 function trunc{P}(x::ArbArb{P}, sig::Int=P, base::Int=10)
     sig=abs(sig); base=abs(base)
     sigbits = min(P, ceil(Int, (sig * log(base)/log(2.0))))
-    z = initializer(ArbArb{P})
+    z = init(ArbArb{P})
     y = abs(x)
     ccall(@libarb(arb_floor), Void,  (Ptr{ArbArb}, Ptr{ArbArb}, Int), &z, &y, sigbits)
     return signbit(x) ? -z : z

@@ -12,7 +12,7 @@ for (op,cfunc) in ((:exp,:arb_exp), (:expm1, :arb_expm1),
     )
   @eval begin
     function ($op){P}(x::ArbArb{P})
-      z = initializer(ArbArb{P})
+      z = init(ArbArb{P})
       ccall(@libarb($cfunc), Void, (Ptr{ArbArb}, Ptr{ArbArb}, Int), &z, &x, P)
       return z
     end
@@ -22,7 +22,7 @@ end
 
 function logbase{P}(x::ArbArb{P}, base::Int)
     b = UInt(abs(base))
-    z = initializer(ArbArb{P})
+    z = init(ArbArb{P})
     ccall(@libarb(arb_log_base_ui), Void, (Ptr{ArbArb}, Ptr{ArbArb}, UInt, Int), &z, &x, b, P)
     return z
 end
@@ -34,8 +34,8 @@ log10{P}(x::ArbArb{P}) = logbase(x, 10)
 for (op,cfunc) in ((:sincos, :arb_sin_cos), (:sincospi, :arb_sin_cos_pi), (:sinhcosh, :arb_sinh_cosh))
   @eval begin
     function ($op){P}(x::ArbArb{P})
-        sz = initializer(ArbArb{P})
-        cz = initializer(ArbArb{P})
+        sz = init(ArbArb{P})
+        cz = init(ArbArb{P})
         ccall(@libarb($cfunc), Void, (Ptr{ArbArb}, Ptr{ArbArb}, Ptr{ArbArb}, Int), &sz, &cz, &x, P)
         return (sz, cz)
     end
@@ -44,7 +44,7 @@ end
 
 
 function atan2{P}(a::ArbArb{P}, b::ArbArb{P})
-    z = initializer(ArbArb{P})
+    z = init(ArbArb{P})
     ccall(@libarb(arb_atan2), Void, (Ptr{ArbArb}, Ptr{ArbArb}, Ptr{ArbArb}, Int), &z, &a, &b, P)
     return z
 end
@@ -53,7 +53,7 @@ for (op,cfunc) in ((:^,:arb_pow_ui), (:pow,:arb_pow_ui), (:root, :arb_root_ui))
   @eval begin
     function ($op){P}(x::ArbArb{P}, y::Int)
       yy = UInt(y)
-      z = initializer(ArbArb{P})
+      z = init(ArbArb{P})
       ccall(@libarb($cfunc), Void, (Ptr{ArbArb}, Ptr{ArbArb}, UInt, Int), &z, &x, &yy, P)
       return z
     end
@@ -64,7 +64,7 @@ end
 for (op,cfunc) in ((:^,:arb_pow), (:pow,:arb_pow))
   @eval begin
     function ($op){P}(x::ArbArb{P}, y::ArbArb{P})
-      z = initializer(ArbArb{P})
+      z = init(ArbArb{P})
       ccall(@libarb($cfunc), Void, (Ptr{ArbArb}, Ptr{ArbArb}, Ptr{ArbArb}, Int), &z, &x, &y, P)
       return z
     end
