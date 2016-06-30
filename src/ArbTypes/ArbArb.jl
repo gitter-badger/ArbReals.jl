@@ -94,7 +94,7 @@ bounds{P}(x::ArbArb{P}) = ( lowerbound(x), upperbound(x) )
 # ArbArb <-> ArbArf, ArbMag
 
 function midpoint_radius{P}(x::ArbArb{P})
-    m = init(ArbArf)
+    m = init(ArbArf{P})
     r = init(ArbMag)
     m.exponent = x.exponent
     m.size = x.size
