@@ -2,6 +2,7 @@ module ArbReals
 
 import Base: hash, convert, promote_rule,
     string, show, showcompact,
+    precision, setprecision,
     isnan, isinf, isfinite, zero, one,
     isequal, isless, (==), (!=), (<), (<=), (>=), (>),
     abs, signbit, sign, copysign, flipsign,
