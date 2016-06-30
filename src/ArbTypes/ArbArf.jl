@@ -81,13 +81,16 @@ function convert{P}(::Type{Float64}, x::ArbArf{P})
 end
 convert{P}(::Type{Float32}, x::ArbArf{P}) = convert(Float32, convert(Float64, x))
 
-for T in (:Float64, :Float32, :BigFloat, :BigInt, :(Rational{BigInt}))
-    @eval begin
-        function convert(::Type{ArbArf}, x::($T))
-            p = precision(ArbArf)
-            return convert(ArbArf{p}, x)
-        end
-    end
+function convert(::Type{ArbArf}, x::Float64)
+    prec = precsion(ArbArf)
+    typ = ArbArf{prec}
+    return convert(typ,  x)
+end
+
+function convert(::Type{ArbArf}, x::BigFloat)
+    prec = precsion(ArbArf)
+    typ = ArbArf{prec}
+    return convert(typ,  x)
 end
 
 # string, show
