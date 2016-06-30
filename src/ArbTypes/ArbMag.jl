@@ -12,7 +12,7 @@ end
 ArbMag{T<:Union{Int64,Int32}}(exponent::Int, mantissa::T) =
     ArbMag(exponent, mantissa % UInt64)
 
-function releaseMag{T<:ArbMag}(x::T)
+function release{T<:ArbMag}(x::T)
     ccall(@libarb(mag_clear), Void, (Ptr{T}, ), &x)
     return nothing
 end
@@ -20,7 +20,7 @@ end
 function init{T<:ArbMag}(::Type{T})
     z = ArbMag(zero(Int), zero(UInt64))
     ccall(@libarb(mag_init), Void, (Ptr{T}, ), &z)
-    finalizer(z, releaseMag)
+    finalizer(z, release)
     return z
 end
 
@@ -37,35 +37,35 @@ end
 
 # conversions
 
-function convert{T<:ArbMag}(::Type{Float64}, x::T)
-    z = ccall(@libarb(mag_get_d), Float64, (Ptr{T}, ), &x)
+function convert(::Type{Float64}, x::ArbMag)
+    z = ccall(@libarb(mag_get_d), Float64, (Ptr{ArbMag}, ), &x)
     return z
 end
-function convert{T<:ArbMag}(::Type{Float32}, x::T)
+function convert(::Type{Float32}, x::ArbMag)
     z = convert(Float64, x)
     convert(Float32, z)
     return z
 end
 
-function convert{T<:ArbMag}(::Type{T}, x::Float64)
+function convert(::Type{ArbMag}, x::Float64)
     z = ArbMag()
-    ccall(@libarb(mag_set_d), Void, (Ptr{T}, Ptr{Float64}), &z, &x)
+    ccall(@libarb(mag_set_d), Void, (Ptr{ArbMag}, Ptr{Float64}), &z, &x)
     return z
 end
-function convert{T<:ArbMag}(::Type{T}, x::Float32)
-    return convert(T, convert(Float64, x))
+function convert(::Type{ArbMag}, x::Float32)
+    return convert(ArbMag, convert(Float64, x))
 end
 
-function convert{T<:ArbMag}(::Type{T}, x::UInt)
+function convert(::Type{ArbMag}, x::UInt)
     z = ArbMag()
-    ccall(@libarb(mag_set_ui), Void, (Ptr{T}, Ptr{UInt}), &z, &x)
+    ccall(@libarb(mag_set_ui), Void, (Ptr{ArbMag}, Ptr{UInt}), &z, &x)
     return z
 end
-function convert{T<:ArbMag}(::Type{T}, x::Int)
+function convert(::Type{ArbMag}, x::Int)
     if x < 0
         throw(ErrorException("Arb magnitudes must be nonnegative"))
     end
-    return convert(T, convert(UInt,x))
+    return convert(ArbMag, convert(UInt,x))
 end
 
 # promotions

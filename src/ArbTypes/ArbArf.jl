@@ -20,7 +20,7 @@ precision(::Type{ArbArf}) = ArbArfPrecision[1]
 precision{P}(::Type{ArbArf{P}}) = P
 precision{P}(x::ArbArf{P}) = P
 
-function releaseArf{P}(x::ArbArf{P})
+function release{P}(x::ArbArf{P})
     ccall(@libarb(arf_clear), Void, (Ptr{ArbArf{P}}, ), &x)
     return nothing
 end
@@ -28,7 +28,7 @@ end
 function init{P}(::Type{ArbArf{P}})
     z = ArbArf{P}(zero(Int), zero(UInt64), zero(Int64), zero(Int64))
     ccall(@libarb(arf_init), Void, (Ptr{ArbArf{P}}, ), &z)
-    finalizer(z, releaseArf)
+    finalizer(z, release{P})
     return z
 end
 
