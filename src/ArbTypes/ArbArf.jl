@@ -18,7 +18,7 @@ precision{P}(x::ArbArf{P}) = P
 
 ArbArf{P}(::Type{Val{P}}, exponent::Int, size::Int64, mantissa1::Int64, mantissa2::Int64) =
     ArbArf{P}(exponent, size % UInt64, mantissa1, mantissa2)
-ArbArf(::Type{Val{P}}, exponent::Int, size::Int32, mantissa1::Int64, mantissa2::Int64) =
+ArbArf{P}(::Type{Val{P}}, exponent::Int, size::Int32, mantissa1::Int64, mantissa2::Int64) =
     ArbArf{P}(exponent, Int64(size) % UInt64, mantissa1, mantissa2)
 
 
