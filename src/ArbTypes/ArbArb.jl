@@ -144,6 +144,44 @@ function convert{P}(::Type{ArbArb{P}}, x::String)
 end
 convert(::Type{ArbArb}, x::String) = convert(ArbArb{precision(ArbArb)}, x)
 
+
+function String{P}(x::ArbArb{P}, ndigits::Int, flags::UInt)
+   n = max(1,min(abs(ndigits), floor(Int, P*0.3010299956639811952137)))
+   cstr = ccall(@libarb(arb_get_str), Ptr{UInt8}, (Ptr{ArbFloat}, Int, UInt), &x, n, flags)
+   s = unsafe_string(cstr)
+   ccall(@libflint(flint_free), Void, (Ptr{UInt8},), cstr)
+   return s
+end
+
+function String{P}(x::ArbArb{P}, flags::UInt)
+   n = floor(Int, P*0.3010299956639811952137)
+   cstr = ccall(@libarb(arb_get_str), Ptr{UInt8}, (Ptr{ArbFloat}, Int, UInt), &x, n, flags)
+   s = unsafe_string(cstr)
+   ccall(@libflint(flint_free), Void, (Ptr{UInt8},), cstr)
+   s
+end
+
+
+function string{P}(x::ArbArb{P}, ndigits::Int)
+   s = String(x, ndigits, UInt(4)) # RoundNearest
+   return s
+end
+
+function string{P}(x::ArbArb{P})
+   s = String(x,UInt(4)) # RoundNearest
+   return s
+end
+
+function string_midpoint{P}(x::ArbArb{P})
+   s = String(x,UInt(2)) # midpoint only (within 1ulp), RoundNearest
+   return s
+end
+function string_midpoint{P}(x::ArbArb{P}, ndigits::Int)
+   s = String(x, ndigits, UInt(2)) # midpoint only (within 1ulp), RoundNearest
+   return s
+end
+
+#=
 function string_midpoint{P}(x::ArbArb{P})
    n = floor(Int, 0.125+P*0.3010299956639811952137)
    flags = UInt(2) # suppress radius
@@ -161,6 +199,7 @@ function string{P}(x::ArbArb{P})
    ccall(@libflint(flint_free), Void, (Ptr{UInt8},), cstr)
    return s
 end
+=#
 
 function show{P}(io::IO, x::ArbArb{P})
     s = string(x)
