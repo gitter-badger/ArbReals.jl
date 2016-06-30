@@ -36,7 +36,7 @@ function release{P}(x::ArbArb{P})
 end
 
 function init{P}(::Type{ArbArb{P}})
-    z = Arb{P}(zero(Int), zero(UInt64), zero(Int64), zero(Int64), zero(Int), zero(UInt64))
+    z = ArbArb{P}(zero(Int), zero(UInt64), zero(Int64), zero(Int64), zero(Int), zero(UInt64))
     ccall(@libarb(arb_init), Void, (Ptr{ArbArb{P}}, ), &z)
     finalizer(z, release)
     return z
