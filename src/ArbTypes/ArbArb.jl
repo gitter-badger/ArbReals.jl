@@ -59,7 +59,7 @@ hash{P}(z::ArbArb{P}, h::UInt) =
 function midpoint{P}(x::ArbArb{P})
     z = init(ArbArb{P})
     ccall(@libarb(arb_get_mid_arb), Void, (Ptr{ArbArb}, Ptr{ArbArb}), &z, &x)
-    retrun z
+    return z
 end
 
 function radius{P}(x::ArbArb{P})
