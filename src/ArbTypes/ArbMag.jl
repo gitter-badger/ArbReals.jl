@@ -3,7 +3,7 @@
    see also (https://github.com/thofma/Hecke.jl/blob/master/src/Misc/mag.jl)
 =#
 
-immutable ArbMag
+type ArbMag
     exponent::Int
     mantissa::UInt64
 end
