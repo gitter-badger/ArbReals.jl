@@ -145,6 +145,25 @@ function convert{P}(::Type{ArbArb{P}}, x::ArbArf{P})
 end
 
 
+#interconvert ArbFloat{P} with ArbFloat{Q}
+
+function convert{P,Q}(::Type{ArbFloat{Q}}, a::ArbFloat{P})
+    if (Q < P)
+        a = round(a, Q, 2)
+    end
+
+    z = init(ArbArb{Q})
+    z.exponent  = a.exponent
+    z.size      = a.size
+    z.mantissa1 = a.mantissa1
+    z.mantissa2 = a.mantissa2
+    z.radiusExp = a.radiusExp
+    z.radiusMan = a.radiusMan
+
+    return z
+end
+
+
 # rounding codes
 # see https://github.com/fredrik-johansson/arb/blob/master/arf.h
 # and https://github.com/fredrik-johansson/arb/blob/master/fmpr.h
