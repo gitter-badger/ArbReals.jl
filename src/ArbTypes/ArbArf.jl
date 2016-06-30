@@ -3,7 +3,7 @@
    see also (https://github.com/Nemocas/Nemo.jl/blob/master/src/arb/ArbTypes.jl)
    see also (https://github.com/thofma/Hecke.jl/blob/master/src/Misc/arf.jl)
 =#
-
+`
 # parameter P is the precision in bits
 type ArbArf{P}
     exponent::Int
@@ -12,15 +12,13 @@ type ArbArf{P}
     mantissa2::Int64
 end
 
+# working precision for ArbArf
+# set indirectly through setprecision(Arb, n)
+const ArbArfPrecision = [116,]
+precision(::Type{ArbArf}) = ArbArfPrecision[1]
+
 precision{P}(::Type{ArbArf{P}}) = P
 precision{P}(x::ArbArf{P}) = P
-
-
-ArbArf{P}(::Type{Val{P}}, exponent::Int, size::Int64, mantissa1::Int64, mantissa2::Int64) =
-    ArbArf{P}(exponent, size % UInt64, mantissa1, mantissa2)
-ArbArf{P}(::Type{Val{P}}, exponent::Int, size::Int32, mantissa1::Int64, mantissa2::Int64) =
-    ArbArf{P}(exponent, Int64(size) % UInt64, mantissa1, mantissa2)
-
 
 function releaseArf{P}(x::ArbArf{P})
     ccall(@libarb(arf_clear), Void, (Ptr{ArbArf{P}}, ), &x)
@@ -83,6 +81,9 @@ function convert{P}(::Type{Float64}, x::ArbArf{P})
 end
 convert{P}(::Type{Float32}, x::ArbArf{P}) = convert(Float32, convert(Float64, x))
 
+for T in (:Float64, :Float32, :BigFloat, :BigInt, :(Rational{BigInt}))
+    @eval convert(::Type{ArbArf}, x::($T)) = convert(ArbArf{precision(ArbArf)}, x)
+end
 
 function frexp{P}(x::ArbArf{P})
    mantissa = init(ArbArf{P})
