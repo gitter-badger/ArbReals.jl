@@ -28,7 +28,7 @@ end
 function init{P}(::Type{ArbArf{P}})
     z = ArbArf{P}(zero(Int), zero(UInt64), zero(Int64), zero(Int64))
     ccall(@libarb(arf_init), Void, (Ptr{ArbArf{P}}, ), &z)
-    finalizer(z, release{P})
+    finalizer(z, release)
     return z
 end
 
@@ -82,13 +82,13 @@ end
 convert{P}(::Type{Float32}, x::ArbArf{P}) = convert(Float32, convert(Float64, x))
 
 function convert(::Type{ArbArf}, x::Float64)
-    prec = precsion(ArbArf)
+    prec = precision(ArbArf)
     typ = ArbArf{prec}
     return convert(typ,  x)
 end
 
 function convert(::Type{ArbArf}, x::BigFloat)
-    prec = precsion(ArbArf)
+    prec = precision(ArbArf)
     typ = ArbArf{prec}
     return convert(typ,  x)
 end
