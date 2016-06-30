@@ -11,9 +11,9 @@ import Base: hash, convert, promote_rule,
     (+), (-), (*), (/), muladd, hypot, sqrt, inv,
     lowerbound, upperbound,
     exp, expm1, log, log1p, log2, log10,
-    sin, sinpi, cos, cospi, tan, cot, sincos, sincospi,
+    sin, sinpi, cos, cospi, tan, cot,
     asin, acos, atan,
-    sinh, cosh, tanh, coth, sinhcosh,
+    sinh, cosh, tanh, coth,
     asinh, acosh, atanh,
     factorial, gamma, lgamma, digamma, sinc, zeta
 
@@ -28,6 +28,7 @@ export stringcompact,
     notequal, overlap, donotoverlap,
     contains, doesnotcontain, iscontainedby, isnotcontainedby,
     addmul, submul, mulsub, invsqrt, pow, root,
+    sincos, sincospi, sinhcosh,
     rgamma, doublefactorial, risingfactorial,
     polylog, agm
 

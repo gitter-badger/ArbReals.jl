@@ -145,9 +145,9 @@ function convert{P}(::Type{ArbArb{P}}, x::ArbArf{P})
 end
 
 
-#interconvert ArbFloat{P} with ArbFloat{Q}
+#interconvert ArbArb{P} with ArbArb{Q}
 
-function convert{P,Q}(::Type{ArbFloat{Q}}, a::ArbFloat{P})
+function convert{P,Q}(::Type{ArbArb{Q}}, a::ArbArb{P})
     if (Q < P)
         a = round(a, Q, 2)
     end
