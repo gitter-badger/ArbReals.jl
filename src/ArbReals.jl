@@ -8,8 +8,14 @@ import Base: hash, convert, promote_rule,
     isequal, isless, (==), (!=), (<), (<=), (>=), (>),
     abs, signbit, sign, copysign, flipsign,
     round, floor, ceil, trunc,
-    (+), (-), (*), (/),
-    lowerbound, upperbound
+    (+), (-), (*), (/), muladd, hypot, sqrt, inv,
+    lowerbound, upperbound,
+    exp, expm1, log, log1p, log2, log10,
+    sin, sinpi, cos, cospi, tan, cot, sincos, sincospi,
+    asin, acos, atan,
+    sinh, cosh, tanh, coth, sinhcosh,
+    asinh, acosh, atanh,
+    factorial, gamma, lgamma, digamma, sinc, zeta
 
 export stringcompact,
     bounds, midpoint, radius, midpoint_radius,
@@ -20,7 +26,10 @@ export stringcompact,
     isexact, notexact, isinteger, notinteger,
     ispositive, notpositive, isnegative, notnegative,
     notequal, overlap, donotoverlap,
-    contains, doesnotcontain, iscontainedby, isnotcontainedby
+    contains, doesnotcontain, iscontainedby, isnotcontainedby,
+    addmul, submul, mulsub, invsqrt, pow, root,
+    rgamma, doublefactorial, risingfactorial,
+    polylog, agm
 
 
 include("NemoLibs.jl")  # ensure needed C libraries
@@ -32,5 +41,9 @@ include("ArbTypes/ArbArb.jl")
 include("ArbWrap/support.jl")
 include("ArbWrap/numsupport.jl")
 include("ArbWrap/predicates.jl")
+
+include("ArbWrap/arithmetic.jl")
+include("ArbWrap/elementary.jl")
+include("ArbWrap/special.jl")
 
 end # module ArbReals
