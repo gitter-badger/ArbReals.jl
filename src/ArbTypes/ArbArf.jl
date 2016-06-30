@@ -16,9 +16,9 @@ precision{P}(::Type{ArbArf{P}}) = P
 precision{P}(x::ArbArf{P}) = P
 
 
-ArbArf{P}(exponent::Int, size::Int64, mantissa1::Int64, mantissa2::Int64) =
+ArbArf{P}(::Type{Val{P}}, exponent::Int, size::Int64, mantissa1::Int64, mantissa2::Int64) =
     ArbArf{P}(exponent, size % UInt64, mantissa1, mantissa2)
-ArbArf{P}(exponent::Int, size::Int32, mantissa1::Int64, mantissa2::Int64) =
+ArbArf(::Type{Val{P}}, exponent::Int, size::Int32, mantissa1::Int64, mantissa2::Int64) =
     ArbArf{P}(exponent, Int64(size) % UInt64, mantissa1, mantissa2)
 
 
@@ -34,7 +34,7 @@ function init{P}(::Type{ArbArf{P}})
     return z
 end
 
-ArbArf{P}() = init(ArbArf{P})
+ArbArf{P}(::Type{Val{P}}) = init(ArbArf{P})
 
 
 # define hash so other things work
@@ -72,7 +72,7 @@ convert{P}(::Type{ArbArf{P}}, x::Rational{BigInt}) = convert(ArbArf, convert(Big
 
 function convert{P}(::Type{ArbArf{P}}, x::Float64)
     z = init(ArbArf{P})
-    ccall(@libarb(arf_set_d), Void, (Ptr{ArbArf{P}}, Float64}), &z, x)
+    ccall(@libarb(arf_set_d), Void, (Ptr{ArbArf{P}}, Float64), &z, x)
     return z
 end
 convert{P}(::Type{ArbArf{P}}, x::Float32) = convert(ArbArf{P}, convert(Float64,x))
