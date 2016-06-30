@@ -32,7 +32,7 @@ function init{P}(::Type{ArbArf{P}})
     return z
 end
 
-ArbArf{P}(::Type{Val{P}}) = init(ArbArf{P})
+ArbArf() = init(ArbArf{precision(ArbArf)})
 
 
 # define hash so other things work
