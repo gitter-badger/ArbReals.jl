@@ -161,3 +161,9 @@ function string{P}(x::ArbArb{P})
    ccall(@libflint(flint_free), Void, (Ptr{UInt8},), cstr)
    return s
 end
+
+function show{P}(io::IO, x::ArbArb{P})
+    s = string(x)
+    print(io, s)
+end
+
