@@ -64,11 +64,11 @@ for T in (:UInt, :Int, :Float32, :Float64)
 end
 
 function string(x::ArbMag)
-    fp = convert(Float64, x)
+    fp = convert(Float32, convert(Float64, x))
     string(fp)
 end
 
 function show(io::IO, x::ArbMag)
     s = string(x)
-    show(io, s)
+    print(io, s)
 end
