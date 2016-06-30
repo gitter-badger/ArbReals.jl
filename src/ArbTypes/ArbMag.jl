@@ -1,5 +1,6 @@
 #=
    The mag type used by Arb (fredrikj.net/arb/mag.html)
+   see also (https://github.com/Nemocas/Nemo.jl/blob/master/src/arb/ArbTypes.jl)
    see also (https://github.com/thofma/Hecke.jl/blob/master/src/Misc/mag.jl)
 =#
 
@@ -34,6 +35,8 @@ else
    hash(z::ArbMag, h::UInt) = hash( reinterpret(UInt32, z.exponent) % UInt64, z.mantissa )
 end
 
+# conversions
+
 function convert{T<:ArbMag}(::Type{Float64}, x::T)
     z = ccall(@libarb(mag_get_d), Float64, (Ptr{T}, ), &x)
     return z
@@ -65,10 +68,14 @@ function convert{T<:ArbMag}(::Type{T}, x::Int)
     return convert(T, convert(UInt,x))
 end
 
+# promotions
+
 for T in (:UInt, :Int, :Float32, :Float64)
     @eval promote_rule(::Type{ArbMag}, ::Type{$T}) = ArbMag
 end
 
+# string, show
+#
 function string(x::ArbMag)
     fp = convert(Float64, x)
     return string(fp)
