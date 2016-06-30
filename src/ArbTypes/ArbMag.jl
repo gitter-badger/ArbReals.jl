@@ -33,6 +33,11 @@ else
    hash(z::ArbMag, h::UInt) = hash( reinterpret(UInt32, z.exponent) % UInt64, z.mantissa )
 end
 
+function convert{T<:ArbMag}(::Type{Float64}, x::T)
+    z = ccall(@libarb(mag_get_d), Float64, (Ptr{T}, ), &x)
+    z
+end
+
 function convert{T<:ArbMag}(::Type{T}, x::Float64)
     z = ArbMag()
     ccall(@libarb(mag_set_d), Void, (Ptr{T}, Ptr{Float64}), &z, &x)
@@ -58,3 +63,12 @@ for T in (:UInt, :Int, :Float32, :Float64)
     @eval promote_rule(::Type{ArbMag}, ::Type{$T}) = ArbMag
 end
 
+function string(x::ArbMag)
+    fp = convert(Float64, x)
+    string(fp)
+end
+
+function show(io::IO, x::ArbMag)
+    s = string(x)
+    show(io, s)
+end
