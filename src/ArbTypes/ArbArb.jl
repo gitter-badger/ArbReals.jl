@@ -42,7 +42,7 @@ function init{P}(::Type{ArbArb{P}})
     return z
 end
 
-ArbArb() = init(ArbArbprecision(ArbArb})
+ArbArb() = init(ArbArbprecision(ArbArb))
 
 
 # a type specific hash function helps the type to 'just work'
