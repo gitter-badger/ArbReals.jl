@@ -215,12 +215,13 @@ end
 
 function string{P}(x::ArbArb{P})
    flags = isexact(x) ? UInt(3) : UInt(1) # RoundNearest, many digits
-   s = String(x,flags) # RoundNearest,
+   s = String(x, 15, flags) # RoundNearest,
    return s
 end
 
 function stringall{P}(x::ArbArb{P})
-   s = String(x,UInt(1)) # RoundNearest
+   flags = isexact(x) ? UInt(3) : UInt(1) # RoundNearest, many digits
+   s = String(x, flags)
    return s
 end
 function stringcompact{P}(x::ArbArb{P})
