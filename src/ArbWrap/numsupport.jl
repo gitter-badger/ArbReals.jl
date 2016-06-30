@@ -30,53 +30,53 @@ end
 
 # !!Check this!! these all use RoundNearest?
 
-function round{P}(x::ArbFloat{P}, sig::Int=P, base::Int=10)
+function round{P}(x::ArbArb{P}, sig::Int=P, base::Int=10)
     sig=abs(sig); base=abs(base)
     sigbits = min(P, ceil(Int, (sig * log(base)/log(2.0))))
-    z = initializer(ArbFloat{P})
-    ccall(@libarb(arb_set_round), Void,  (Ptr{ArbFloat}, Ptr{ArbFloat}, Int), &z, &x, sigbits)
+    z = initializer(ArbArb{P})
+    ccall(@libarb(arb_set_round), Void,  (Ptr{ArbArb}, Ptr{ArbArb}, Int), &z, &x, sigbits)
     return z
 end
 
-function ceil{P}(x::ArbFloat{P}, sig::Int=P, base::Int=10)
+function ceil{P}(x::ArbArb{P}, sig::Int=P, base::Int=10)
     sig=abs(sig); base=abs(base)
     sigbits = min(P, ceil(Int, (sig * log(base)/log(2.0))))
-    z = initializer(ArbFloat{P})
-    ccall(@libarb(arb_ceil), Void,  (Ptr{ArbFloat}, Ptr{ArbFloat}, Int), &z, &x, sigbits)
+    z = initializer(ArbArb{P})
+    ccall(@libarb(arb_ceil), Void,  (Ptr{ArbArb}, Ptr{ArbArb}, Int), &z, &x, sigbits)
     return z
 end
 
-function floor{P}(x::ArbFloat{P}, sig::Int=P, base::Int=10)
+function floor{P}(x::ArbArb{P}, sig::Int=P, base::Int=10)
     sig=abs(sig); base=abs(base)
     sigbits = min(P, ceil(Int, (sig * log(base)/log(2.0))))
-    z = initializer(ArbFloat{P})
-    ccall(@libarb(arb_floor), Void,  (Ptr{ArbFloat}, Ptr{ArbFloat}, Int), &z, &x, sigbits)
+    z = initializer(ArbArb{P})
+    ccall(@libarb(arb_floor), Void,  (Ptr{ArbArb}, Ptr{ArbArb}, Int), &z, &x, sigbits)
     return z
 end
 
 
-function trunc{P}(x::ArbFloat{P}, sig::Int=P, base::Int=10)
+function trunc{P}(x::ArbArb{P}, sig::Int=P, base::Int=10)
     sig=abs(sig); base=abs(base)
     sigbits = min(P, ceil(Int, (sig * log(base)/log(2.0))))
-    z = initializer(ArbFloat{P})
+    z = initializer(ArbArb{P})
     y = abs(x)
-    ccall(@libarb(arb_floor), Void,  (Ptr{ArbFloat}, Ptr{ArbFloat}, Int), &z, &y, sigbits)
+    ccall(@libarb(arb_floor), Void,  (Ptr{ArbArb}, Ptr{ArbArb}, Int), &z, &y, sigbits)
     return signbit(x) ? -z : z
 end
 
-function round{T,P}(::Type{T}, x::ArbFloat{P}, sig::Int=P, base::Int=10)
+function round{T,P}(::Type{T}, x::ArbArb{P}, sig::Int=P, base::Int=10)
     z = round(x, sig, base)
     return convert(T, z)
 end
-function ceil{T,P}(::Type{T}, x::ArbFloat{P}, sig::Int=P, base::Int=10)
+function ceil{T,P}(::Type{T}, x::ArbArb{P}, sig::Int=P, base::Int=10)
     z = ceil(x, sig, base)
     return convert(T, z)
 end
-function floor{T,P}(::Type{T}, x::ArbFloat{P}, sig::Int=P, base::Int=10)
+function floor{T,P}(::Type{T}, x::ArbArb{P}, sig::Int=P, base::Int=10)
     z = floor(x, sig, base)
     return convert(T, z)
 end
-function trunc{T,P}(::Type{T}, x::ArbFloat{P}, sig::Int=P, base::Int=10)
+function trunc{T,P}(::Type{T}, x::ArbArb{P}, sig::Int=P, base::Int=10)
     z = trunc(x, sig, base)
     return convert(T, z)
 end
