@@ -3,7 +3,7 @@
    see also (https://github.com/Nemocas/Nemo.jl/blob/master/src/arb/ArbTypes.jl)
    see also (https://github.com/thofma/Hecke.jl/blob/master/src/Misc/arf.jl)
 =#
-`
+
 # parameter P is the precision in bits
 type ArbArf{P}
     exponent::Int
