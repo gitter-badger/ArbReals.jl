@@ -144,7 +144,7 @@ function convert{P}(::Type{ArbArb{P}}, x::String)
 end
 convert(::Type{ArbArb}, x::String) = convert(ArbArb{precision(ArbArb)}, x)
 
-function midpointstring{P}(x::ArbArb{P})
+function string_midpoint{P}(x::ArbArb{P})
    n = floor(Int, 0.125+P*0.3010299956639811952137)
    flags = UInt(2) # suppress radius
    cstr = ccall(@libarb(arb_get_str), Ptr{UInt8}, (Ptr{ArbArb{P}}, Int, UInt), &x, n, flags)

@@ -10,7 +10,8 @@ import Base: hash, convert, promote_rule,
     lowerbound, upperbound
 
 export stringcompact,
-    bounds, midpoint, radius, midpoint_radius
+    bounds, midpoint, radius, midpoint_radius,
+    string_midpoint
 
 include("NemoLibs.jl")  # ensure needed C libraries
 
