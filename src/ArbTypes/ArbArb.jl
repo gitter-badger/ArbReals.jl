@@ -144,6 +144,22 @@ function convert{P}(::Type{ArbArb{P}}, x::ArbArf{P})
     return z
 end
 
+
+# rounding codes
+# see https://github.com/fredrik-johansson/arb/blob/master/arf.h
+# and https://github.com/fredrik-johansson/arb/blob/master/fmpr.h
+const ArbRoundDown    = ArfRoundDown     # Int32(0)
+const ArbRoundUp      = ArfRoundUp       # Int32(1)
+const ArbRoundFloor   = ArfRoundFloor    # Int32(2)
+const ArbRoundCeil    = ArfRoundCeil     # Int32(3)
+const ArbRoundNearest = ArfRoundNearest  # Int32(4)
+
+# string flag codes
+const StrDefault  = UInt32(0)
+const StrMore     = UInt32(1)
+const StrNoRadius = UInt32(2)
+const StrCondense = UInt32(16)
+
 # string conversions
 
 function convert{P}(::Type{ArbArb{P}}, x::String)

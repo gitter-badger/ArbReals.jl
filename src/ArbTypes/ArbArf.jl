@@ -45,11 +45,11 @@ hash{P}(z::ArbArf{P}, h::UInt) =
 # rounding codes
 # see https://github.com/fredrik-johansson/arb/blob/master/arf.h
 # and https://github.com/fredrik-johansson/arb/blob/master/fmpr.h
-const ArfRoundDown = 0
-const ArfRoundUp = 1
-const ArfRoundFloor = 2
-const ArfRoundCeil = 3
-const ArfRoundNearest = 4
+const ArfRoundDown    = Int32(0)
+const ArfRoundUp      = Int32(1)
+const ArfRoundFloor   = Int32(2)
+const ArfRoundCeil    = Int32(3)
+const ArfRoundNearest = Int32(4)
 
 # conversions
 
