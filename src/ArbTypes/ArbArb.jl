@@ -147,7 +147,7 @@ end
 
 #interconvert ArbArb{P} with ArbArb{Q}
 
-function convert{P}(::Type{ArbArb{P}}, a::ArbArb{P}) = a
+convert{P}(::Type{ArbArb{P}}, a::ArbArb{P}) = a
 function convert{P,Q}(::Type{ArbArb{Q}}, a::ArbArb{P})
     if (Q < P)
         a = round(a, Q, 2)
