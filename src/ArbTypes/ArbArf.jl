@@ -86,12 +86,28 @@ function convert(::Type{ArbArf}, x::Float64)
     typ = ArbArf{prec}
     return convert(typ,  x)
 end
+convert(::Type{ArbArf}, x::Float32) = convert(ArbArf, convert(Float64,x))
 
 function convert(::Type{ArbArf}, x::BigFloat)
     prec = precision(ArbArf)
     typ = ArbArf{prec}
     return convert(typ,  x)
 end
+convert(::Type{ArbArf}, x::BigInt) = convert(ArbArf, convert(BigFloat,x))
+
+function convert{P}(::Type{ArbArf{P}}, x::ArbMag)
+    z = init(ArbArf{P})
+    ccall(@libarb(arf_set_mag), Void, (Ptr{ArbArf{P}}, Ptr{ArbMag}), &z, &x)
+    return z
+end
+convert(::Type{ArbArf}, x::ArbMag) = convert(ArbArf{precision(ArbArf)}, x)
+
+function convert{P}(::Type{ArbMag}, x::ArbArf{P})
+    z = init(ArbMag)
+    ccall(@libarb(arf_get_mag), Void, (Ptr{ArbMag}, Ptr{ArbArf{P}}), &z, &x)
+    return z
+end
+
 
 # string, show
 #
