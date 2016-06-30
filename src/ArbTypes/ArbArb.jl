@@ -163,7 +163,7 @@ end
 
 
 function string{P}(x::ArbArb{P}, ndigits::Int)
-   s = String(x, ndigits, UInt(4)) # RoundNearest
+   s = String(x, ndigits, UInt(1)) # RoundNearest
    return s
 end
 
@@ -177,7 +177,7 @@ function string_midpoint{P}(x::ArbArb{P})
    return s
 end
 function string_midpoint{P}(x::ArbArb{P}, ndigits::Int)
-   s = String(x, ndigits, UInt(2)) # midpoint only (within 1ulp), RoundNearest
+   s = String(x, ndigits, UInt(3)) # midpoint only (within 1ulp), RoundNearest
    return s
 end
 
