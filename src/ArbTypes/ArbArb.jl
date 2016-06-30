@@ -147,7 +147,7 @@ convert(::Type{ArbArb}, x::String) = convert(ArbArb{precision(ArbArb)}, x)
 
 function String{P}(x::ArbArb{P}, ndigits::Int, flags::UInt)
    n = max(1,min(abs(ndigits), floor(Int, P*0.3010299956639811952137)))
-   cstr = ccall(@libarb(arb_get_str), Ptr{UInt8}, (Ptr{ArbFloat}, Int, UInt), &x, n, flags)
+   cstr = ccall(@libarb(arb_get_str), Ptr{UInt8}, (Ptr{ArbArb{P}}, Int, UInt), &x, n, flags)
    s = unsafe_string(cstr)
    ccall(@libflint(flint_free), Void, (Ptr{UInt8},), cstr)
    return s
@@ -155,7 +155,7 @@ end
 
 function String{P}(x::ArbArb{P}, flags::UInt)
    n = floor(Int, P*0.3010299956639811952137)
-   cstr = ccall(@libarb(arb_get_str), Ptr{UInt8}, (Ptr{ArbFloat}, Int, UInt), &x, n, flags)
+   cstr = ccall(@libarb(arb_get_str), Ptr{UInt8}, (Ptr{ArbArb{P}}, Int, UInt), &x, n, flags)
    s = unsafe_string(cstr)
    ccall(@libflint(flint_free), Void, (Ptr{UInt8},), cstr)
    s
