@@ -11,7 +11,7 @@ ArbReals
 
 | __visit the Wiki for current todos/thoughts/perspecitves__ |   
 |:----------------------------------------------------------:|  
-| _use the whiteboards, participants have editing priveledges_ |   
+| _use the whiteboards, participants have editing privileges_ |   
 
 
 *****
