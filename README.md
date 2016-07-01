@@ -7,7 +7,7 @@ real intervals with floating point bounds (uses the Arb library)
 
 ***
 
->>>{visit the Wiki for current questions/options/perspecitves}
+>>> __visit the Wiki for current questions/options/perspecitves__
 
 ***
 
