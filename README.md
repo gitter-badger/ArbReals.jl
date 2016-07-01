@@ -5,15 +5,17 @@ real intervals with floating point bounds (uses the Arb library)
 
 **for collaborative design and construction**
 
+```
 
-<center>  
+```
 
 | __visit the Wiki for current todos/thoughts/perspecitves__ |   
 |:----------------------------------------------------------:|  
-| _please use the whiteboards, participants have editing priveledges_ |   
-| _(to participate, send email David Sanders or Jeffrey Sarnoff)_ |
+| _use the whiteboards, participants have editing priveledges_ |   
 
-</center>
+
+_(to participate, send email David Sanders or Jeffrey Sarnoff)_ 
+
 
 ***
 
