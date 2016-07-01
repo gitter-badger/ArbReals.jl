@@ -3,7 +3,13 @@ ArbReals
 
 real intervals with floating point bounds (uses the Arb library)
 
-**under construction -- better now, needs easy conversions (pending)**
+**for collaborative design and construction**
+
+***
+
+>>>{visit the Wiki for current questions/options/perspecitves}
+
+***
 
 ##Use (interval valued)
 ```julia
