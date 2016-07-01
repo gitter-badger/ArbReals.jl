@@ -9,9 +9,9 @@ ArbReals
 ****
 
 
-| __visit the Wiki to see current todos/thoughts/perspecitves__ |   
-|:----------------------------------------------------------:|  
-| __use the whiteboards, participants have editing privileges__ |  
+>> | __visit the Wiki to see current todos/thoughts/perspecitves__ |   
+>> |:-------------------------------------------------------------:|   
+>> | __use the whiteboards, participants have editing privileges__ |   
 
 
 *****
