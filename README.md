@@ -5,7 +5,7 @@ ArbReals
 
 #####for collaborative design and construction
 
-######&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`To participate, email David Sanders or Jeffrey Sarnoff.`
+######&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`To participate, email David Sanders or Jeffrey Sarnoff.`
 
 | __visit the Wiki for current todos/thoughts/perspecitves__ |   
 |:----------------------------------------------------------:|  
