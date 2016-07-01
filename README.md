@@ -1,23 +1,22 @@
 ArbReals
 ========
 
-real intervals with floating point bounds (uses the Arb library)
+######real intervals with floating point bounds (uses the Arb library)
 
-**for collaborative design and construction**
+#####for collaborative design and construction
 
-```
-To participate, e-ask David Sanders or Jeffrey Sarnoff 
-```
+######&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`To participate, email David Sanders or Jeffrey Sarnoff.`
 
 | __visit the Wiki for current todos/thoughts/perspecitves__ |   
 |:----------------------------------------------------------:|  
 | _use the whiteboards, participants have editing priveledges_ |   
 
 
-_(to participate, send email David Sanders or Jeffrey Sarnoff)_ 
+-----
 
 
-***
+
+
 
 ##Use (interval valued)
 ```julia
