@@ -6,7 +6,7 @@ real intervals with floating point bounds (uses the Arb library)
 **for collaborative design and construction**
 
 ```
-
+To participate, e-ask David Sanders or Jeffrey Sarnoff 
 ```
 
 | __visit the Wiki for current todos/thoughts/perspecitves__ |   
