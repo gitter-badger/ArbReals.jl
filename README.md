@@ -9,7 +9,7 @@ ArbReals
   
   
 
->>  __visit the Wiki to see current todos/thoughts/perspecitves__    
+>>  __visit the [Wiki](https://github.com/JuliaArbTypes/ArbReals.jl/wiki) to see current todos/thoughts/perspecitves__    
 >>
 >>  __use the whiteboards, participants have editing privileges__ 
 
