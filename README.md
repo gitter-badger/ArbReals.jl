@@ -1,6 +1,8 @@
 ArbReals
 ========
 
+[![Join the chat at https://gitter.im/ScottPJones/ArbReals.jl](https://badges.gitter.im/ScottPJones/ArbReals.jl.svg)](https://gitter.im/ScottPJones/ArbReals.jl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ######real intervals with floating point bounds (uses the Arb library)
 
 
